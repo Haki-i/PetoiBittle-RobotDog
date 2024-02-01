@@ -35,14 +35,14 @@ Comme vu sur la carte, il y a de nombreux servomoteurs qu’il est possible de c
 
 ![Picture2](https://github.com/Haki-i/PetoiBittle-RobotDog/assets/137703849/9611ee35-094b-482e-a38e-018274ea092c)
 
-On peut lui connecter n’importe quel type de capteur disponible sur le site, mais nous utiliserons principalement des capteurs classiques d'Arduino, ainsi que le connecter en Bluetooth ou par Wi-Fi.
+Nous pouvons lui connecter n’importe quel type de capteur disponible sur le site, mais nous utiliserons principalement des capteurs classiques d'Arduino, en plus des possibilités de connexion Bluetooth ou Wi-Fi.
 
 ![Screenshot 2023-11-03 171755](https://github.com/Haki-i/PetoiBittle-RobotDog/assets/137703849/56435239-1001-43df-a17d-d44eccc26646)
 
 
-On verra que certains modules ont déja des fonctions qui existent pour les faire fonctionner  comme pour la photoresistance, le capteur de distance ultrasonic, la caméra….
+Nous verrons que certains modules ont déja des fonctions qui existent pour les faire fonctionner comme pour la photoresistance, le capteur de distance ultrasonic, la caméra….
 
-# II - Mouvements du robot par sérial
+# II - Mouvements du robot par communication série
 
 Vidéo du projet : <https://www.tiktok.com/@__hakii__/video/7307951749493574944>
 
@@ -53,7 +53,7 @@ Nous allons maintenant voir comment contrôler le robot à travers Arduino, d'ab
 Pour commencer à interagir avec notre robot, nous devons télécharger OpenCat, un dossier très complet avec de nombreux programmes pour faire fonctionner le robot. On télécharge le fichier ZIP Opencat :
 <https://github.com/PetoiCamp/OpenCat>
 
-Le fichier principal est Opencat.ino, où tout est configuré et où toutes les fonctions créées pour le robot sont appelées. De nombreux fichiers header situés dans le dossier src sont inclus dans Opencat.ino. Ils peuvent être modifiés avec un éditeur comme VScode pour ajuster certaines fonctionnalités.
+Le fichier principal est Opencat.ino, où tout est configuré et où toutes les fonctions créées pour le robot sont appelées.
 
 Dans le fichier OpenCat.ino :
 
@@ -75,24 +75,24 @@ Interface de débogage du module de communication : pour connecter le module Blu
 
 Remarque : 
 
-- Le Nyboard V1 utilisé par le robot utilise le contrôleur Atmel ATMEGA328P, qui ne prend en charge qu'un seul port série.
-- Le débit en bauds série par défaut est **de 115 200 bps**.
+- Le Nyboard V1 utilise le contrôleur Atmel ATMEGA328P, qui ne prend en charge qu'un seul port série.
+- Le débit bauds série par défaut est **de 115 200 bps**.
 
-### Envoyer des instructions sérial
+### Envoyer des instructions série
 
 Une fois le robot connecté au PC, il est possible de lui envoyer directement des instructions depuis le moniteur série.
   
-Tous les token commencent par un seul caractère codé en ASCII pour spécifier le type d’action à réaliser. Ils sont sensibles à la casse et sont généralement en minuscules.
+Tous les tokens commencent par un seul caractère codé en ASCII pour spécifier le type d’action à réaliser. Ils sont sensibles à la casse et sont généralement en minuscules.
 
 ![Askii](https://github.com/Haki-i/PetoiBittle-RobotDog/assets/137703849/276b85b7-48f8-460a-a70c-5c92846339e9)
 
 
-Les caractères qui vont nous interessés sont 'k', 'm' et 'i'.
+Les caractères qui vont nous interesser sont 'k', 'm' et 'i'.
 
 - 'k' permet d’exécuter des actions ou compétences prédéfinies. Par exemple, 'ksit' pour asseoir le robot, 'kpee' pour le faire uriner.
 - 'm' contrôle un ou plusieurs servomoteurs en indiquant leur numéro et l’angle souhaité. Exemple : m 0 -70 0 70 8 -30 : bouge le servo 0 à -70 degrés puis le servo 0 à 70 et enfin le servo 8 à -30 degrés
 - 'i' fait bouger plusieurs servos simultanément de la même manière. Exemple : i 0 -45 8 -30 12 -60 : bouge simultanément servo 0, 8 et 12
 
-Ces instructions fonctionnent également via le module Bluetooth. On peut télécharger une application pour se connecter au module et pour pouvoir lui envoyer des informations. On peut écrire les mêmes types de commandes comme m 0 90 et le module va les transmettre par serial à la carte.
+Ces instructions fonctionnent également via le module Bluetooth. On peut télécharger une application pour se connecter au module et pour pouvoir lui envoyer des informations. On peut écrire les mêmes types de commandes comme m 0 90 et le module va les transmettre par communication série à la carte.
 
   
